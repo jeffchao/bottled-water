@@ -57,7 +57,7 @@ rest.port=$PORT
 plugin.path=.apt/usr/share/java
 PROPERTIES
 
-mkdir .apt/usr/bin/config
-cp .apt/etc/kafka/connect-log4j.properties .apt/etc/kafka/config
+mkdir .apt/usr/config
+cp .apt/etc/kafka/connect-log4j.properties .apt/usr/config
 
 .apt/usr/bin/connect-distributed dyno-connect-distributed.properties
