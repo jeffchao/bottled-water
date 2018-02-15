@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+DYNO_CONNECT_DISTRIBUTED_PROPERTIES_FILE="dyno-connect-distributed.properties"
+
+cat > $DYNO_CONNECT_DISTRIBUTED_PROPERTIES_FILE <<PROPERTIES
+producer.security.protocol=SSL
+producer.ssl.truststore.location=$HOME/.truststore.jks
+producer.ssl.truststore.password=$TRUSTSTORE_PASSWORD
+producer.ssl.keystore.location=$HOME/.keystore.jks
+producer.ssl.keystore.password=$KEYSTORE_PASSWORD
+producer.ssl.key.password=$KEYSTORE_PASSWORD
+
+bootstrap.servers=${KAFKA_URL//kafka+ssl:\/\//}
+
+group.id=connect-cluster
+
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter.schemas.enable=true
+value.converter.schemas.enable=true
+
+internal.key.converter=org.apache.kafka.connect.json.JsonConverter
+internal.value.converter=org.apache.kafka.connect.json.JsonConverter
+internal.key.converter.schemas.enable=false
+internal.value.converter.schemas.enable=false
+
+offset.storage.topic=connect-offsets
+offset.storage.replication.factor=1
+
+config.storage.topic=connect-configs
+config.storage.replication.factor=1
+
+status.storage.topic=connect-status
+status.storage.replication.factor=1
+
+offset.flush.interval.ms=10000
+
+# These are provided to inform the user about the presence of the REST host and port configs 
+# Hostname & Port for the REST API to listen on. If this is set, it will bind to the interface used to listen to requests.
+#rest.host.name=
+rest.port=$PORT
+
+# The Hostname & Port that will be given out to other workers to connect to i.e. URLs that are routable from other servers.
+#rest.advertised.host.name=
+#rest.advertised.port=
+
+# Set to a list of filesystem paths separated by commas (,) to enable class loading isolation for plugins
+# (connectors, converters, transformations). The list should consist of top level directories that include 
+# any combination of: 
+# a) directories immediately containing jars with plugins and their dependencies
+# b) uber-jars with plugins and their dependencies
+# c) directories immediately containing the package directory structure of classes of plugins and their dependencies
+# Examples: 
+# plugin.path=/usr/local/share/java,/usr/local/share/kafka/plugins,/opt/connectors,
+plugin.path=.apt/usr/share/java
+PROPERTIES
+
+.apt/usr/bin/connect-distributed dyno-connect-distributed.properties
