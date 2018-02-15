@@ -60,4 +60,4 @@ PROPERTIES
 mkdir .apt/usr/config
 cp .apt/etc/kafka/connect-log4j.properties .apt/usr/config
 
-.apt/usr/bin/connect-distributed dyno-connect-distributed.properties
+KAFKA_HEAP_OPTS="-Xms1g -Xmx1g" .apt/usr/bin/connect-distributed dyno-connect-distributed.properties
