@@ -1,1 +1,1 @@
-web: start-distributed dyno-connect-distributed.properties
+web: ./start-distributed dyno-connect-distributed.properties
