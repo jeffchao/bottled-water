@@ -1,0 +1,3 @@
+:repo:deb [arch=amd64] http://packages.confluent.io/deb/4.0 stable main
+confluent-kafka-2.11
+confluent-schema-registry
