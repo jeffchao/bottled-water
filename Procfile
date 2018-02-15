@@ -1,1 +1,1 @@
-web: connect-distributed ./apt/etc/kafka/connect-distributed.properties
+web: start-distributed dyno-connect-distributed.properties
