@@ -6,6 +6,20 @@ DEBEZIUM_CONNECTOR_URL="https://repo1.maven.org/maven2/io/debezium/debezium-conn
 ./setup_certs HEROKU_KAFKA_JCHAO
 
 cat > $DYNO_CONNECT_DISTRIBUTED_PROPERTIES_FILE <<PROPERTIES
+producer.security.protocol=SSL
+producer.ssl.truststore.location=$HOME/.truststore.jks
+producer.ssl.truststore.password=$TRUSTSTORE_PASSWORD
+producer.ssl.keystore.location=$HOME/.keystore.jks
+producer.ssl.keystore.password=$KEYSTORE_PASSWORD
+producer.ssl.key.password=$KEYSTORE_PASSWORD
+
+consumer.security.protocol=SSL
+consumer.ssl.truststore.location=$HOME/.truststore.jks
+consumer.ssl.truststore.password=$TRUSTSTORE_PASSWORD
+consumer.ssl.keystore.location=$HOME/.keystore.jks
+consumer.ssl.keystore.password=$KEYSTORE_PASSWORD
+consumer.ssl.key.password=$KEYSTORE_PASSWORD
+
 security.protocol=SSL
 ssl.truststore.location=$HOME/.truststore.jks
 ssl.truststore.password=$TRUSTSTORE_PASSWORD

@@ -1,0 +1,16 @@
+{
+  "name": "demo-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "database.hostname": "postgres",
+    "database.port": "",
+    "database.user": "",
+    "database.password": "",
+    "database.dbname" : "postgres",
+    "database.server.name": "dbserver1",
+    "database.whitelist": "demo",
+    "database.history.kafka.bootstrap.servers": "",
+    "database.history.kafka.topic": "schema-changes.demo"
+  }
+}
