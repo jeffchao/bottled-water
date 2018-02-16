@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 DYNO_CONNECT_DISTRIBUTED_PROPERTIES_FILE="dyno-connect-distributed.properties"
+DEBEZIUM_CONNECTOR_URL="https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/0.7.2/debezium-connector-postgres-0.7.2-plugin.tar.gz"
 
 ./setup_certs HEROKU_KAFKA_JCHAO
 
@@ -59,5 +60,12 @@ PROPERTIES
 
 mkdir .apt/usr/config
 cp .apt/etc/kafka/connect-log4j.properties .apt/usr/config
+
+wget -qO - $DEBEZIUM_CONNECTOR_URL | tar -zxf -
+if ! [ $? ]; then
+  echo "could not download debezium connector"
+fi
+
+cp debezium-connector-postgres/*.jar .apt/usr/share/java/kafka
 
 KAFKA_HEAP_OPTS="-Xms1g -Xmx1g" .apt/usr/bin/connect-distributed dyno-connect-distributed.properties
