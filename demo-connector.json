@@ -11,6 +11,6 @@
     "database.server.name": "postgresql-jchao-perpendicular-77247",
     "database.whitelist": "demo",
     "database.history.kafka.bootstrap.servers": "",
-    "database.history.kafka.topic": ""
+    "database.history.kafka.topic": "schema-changes.demo"
   }
 }
