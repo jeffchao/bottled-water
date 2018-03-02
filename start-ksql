@@ -6,12 +6,21 @@ KSQL_URL="https://github.com/confluentinc/ksql/releases/download/v0.4/ksql-0.4.t
 ./setup_certs HEROKU_KAFKA_JCHAO
 
 cat > $KSQL_PROPERTIES_FILE <<PROPERTIES
+consumer.security.protocol=SSL
+consumer.ssl.truststore.location=$HOME/.truststore.jks
+consumer.ssl.truststore.password=$TRUSTSTORE_PASSWORD
+consumer.ssl.keystore.location=$HOME/.keystore.jks
+consumer.ssl.keystore.password=$KEYSTORE_PASSWORD
+consumer.ssl.key.password=$KEYSTORE_PASSWORD
+
 security.protocol=SSL
 ssl.truststore.location=$HOME/.truststore.jks
 ssl.truststore.password=$TRUSTSTORE_PASSWORD
 ssl.keystore.location=$HOME/.keystore.jks
 ssl.keystore.password=$KEYSTORE_PASSWORD
 ssl.key.password=$KEYSTORE_PASSWORD
+
+confluent.support.metrics.enable=false
 
 bootstrap.servers=${HEROKU_KAFKA_JCHAO_URL//kafka+ssl:\/\//}
 
