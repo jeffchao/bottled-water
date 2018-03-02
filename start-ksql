@@ -32,4 +32,4 @@ cp ksql/share/java/ksql/*.jar .apt/usr/share/java/ksql
 mkdir .apt/etc/ksql
 cp ksql/config/* .apt/etc/ksql
 
-KAFKA_HEAP_OPTS="-Xms1g -Xmx1g" .apt/usr/bin/ksql-server-start $KSQL_PROPERTIES_FILE
+KSQL_LOG4J_OPTS="-Dlog4j.configuration=file:.apt/etc/ksql/log4j.properties" KAFKA_HEAP_OPTS="-Xms1g -Xmx1g" .apt/usr/bin/ksql-server-start $KSQL_PROPERTIES_FILE
