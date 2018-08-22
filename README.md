@@ -85,6 +85,13 @@ $ heroku ps:scale web=1
 
 ### Kafka Connect
 
+This repo leverages [Debezium](https://debezium.io/) to do CDC from Postgres into Kafka. For this process, 
+you will also need Heroku Postgres.
+
+```
+$ heroku addons:create heroku-postgres:<plan>
+```
+
 Interact with Kafka Connect via [REST API](https://docs.confluent.io/current/connect/references/restapi.html).
 
 Example:
