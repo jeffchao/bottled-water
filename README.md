@@ -92,6 +92,11 @@ you will also need Heroku Postgres.
 $ heroku addons:create heroku-postgres:<plan>
 ```
 
+Then,
+
+1. pre-create tables in Postgres corresponding to what you have in `demo-connector.json`.
+2. pre-create Kafka topics from `demo-connector.json` as well.
+
 Interact with Kafka Connect via [REST API](https://docs.confluent.io/current/connect/references/restapi.html).
 
 Example:
