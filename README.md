@@ -76,8 +76,6 @@ $ heroku buildpacks:add heroku/jvm
 
 $ heroku addons:create heroku-kafka:basic-0 --app my-app
 
-
-# Modify `demo-connector.json`, then deploy.
 $ git push heroku master
 
 # Comment out or un-comment desired `web` dyno in the `Procfile` (or just deploy to separate apps)
@@ -94,6 +92,8 @@ Example:
 ```sh
 $ curl -X POST -H "Content-Type: application/json" https://my-app.herokuapp.com/connectors
 ```
+
+To deploy a connector, use the `demo-connetor.json` as the body and `POST` it to your app at the `/connectors` endpoint.
 
 ### KSQL
 
