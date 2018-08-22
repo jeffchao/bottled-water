@@ -34,9 +34,11 @@ a one-time/ad-hoc response or a streaming response, depending on your query.
 ## How it works
 
 This repo has an [Aptfile](https://github.com/jeffchao/bottled-water/blob/master/Aptfile).
-This file requires that your app uses the [Heroku Apt Plugin](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt).
+This file requires that your app uses the [Heroku Apt Buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt).
 This `Aptfile` tells each dyno, that when it boots, to download the Kafka Connect and KSQL dependencies.
 These dependencies contain libraries and binaries necessary to run Kafka Connect and KSQL binaries.
+
+These bianries eventually run `java`, so this repo also requires the Heroku JVM Buildpack.
 
 This repo has a [Procfile](https://github.com/jeffchao/bottled-water/blob/master/Procfile) which tells
 a dyno what to do when it runs. This `Procfile` has commands on how to start a Kafka Connect cluster
@@ -62,19 +64,21 @@ it is eventually send over as a request body to Kafka Connect.
 
 ## Setup
 
-Create app, modify configs, deploy to Heroku.
+Create app, add buildpacks, add Kafka add-on, modify configs, deploy to Heroku.
 
 ```sh
 $ heroku apps:create my-app
+$ heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
+$ heroku buildpacks:add heroku/jvm
 # Add a credit card to your account so you can create addons.
 $ heroku addons:create heroku-kafka:basic-0 --app my-app
-# Change `demo-connector.json`, then deploy.
+# Modify `demo-connector.json`, then deploy.
 $ git push heroku master
 ```
 
 ### Kafka Connect
 
-Interact with Kafka Connect via [Rest API](https://docs.confluent.io/current/connect/references/restapi.html).
+Interact with Kafka Connect via [REST API](https://docs.confluent.io/current/connect/references/restapi.html).
 
 Example:
 
