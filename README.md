@@ -68,12 +68,21 @@ Create app, add buildpacks, add Kafka add-on, modify configs, deploy to Heroku.
 
 ```sh
 $ heroku apps:create my-app
+
 $ heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
 $ heroku buildpacks:add heroku/jvm
+
 # Add a credit card to your account so you can create addons.
+
 $ heroku addons:create heroku-kafka:basic-0 --app my-app
+
+
 # Modify `demo-connector.json`, then deploy.
 $ git push heroku master
+
+# Comment out or un-comment desired `web` dyno in the `Procfile` (or just deploy to separate apps)
+# and scale appropriate dynos.
+$ heroku ps:scale web=1
 ```
 
 ### Kafka Connect
