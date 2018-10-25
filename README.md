@@ -74,7 +74,7 @@ $ heroku buildpacks:add heroku/jvm
 
 # Add a credit card to your account so you can create addons.
 
-$ heroku addons:create heroku-kafka:basic-0 --app my-app
+$ heroku addons:create heroku-kafka:standard-0
 
 $ git push heroku master
 
@@ -89,7 +89,7 @@ This repo leverages [Debezium](https://debezium.io/) to do CDC from Postgres int
 you will also need Heroku Postgres.
 
 ```
-$ heroku addons:create heroku-postgres:<plan>
+$ heroku addons:create heroku-postgres:standard-0
 ```
 
 Then,
