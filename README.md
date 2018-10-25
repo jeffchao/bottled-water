@@ -76,6 +76,9 @@ $ heroku buildpacks:add heroku/jvm
 
 $ heroku addons:create heroku-kafka:standard-0
 
+# Add key passwords, please change these
+$ heroku config:set TRUSTSTORE_PASSWORD=changeme KEYSTORE_PASSWORD=changeme
+
 $ git push heroku master
 
 # Comment out or un-comment desired `web` dyno in the `Procfile` (or just deploy to separate apps)
