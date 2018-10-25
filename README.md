@@ -69,7 +69,7 @@ Create app, add buildpacks, add Kafka add-on, modify configs, deploy to Heroku.
 ```sh
 $ heroku apps:create my-app
 
-$ heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
+$ heroku buildpacks:add --index 1 https://github.com/actionsprout/heroku-buildpack-apt
 $ heroku buildpacks:add heroku/jvm
 
 # Add a credit card to your account so you can create addons.
