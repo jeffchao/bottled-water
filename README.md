@@ -5,7 +5,7 @@ This repo serves as an example of how you can run Kafka Connect or KSQL on Herok
 Specifically, it demonstrates how fundamental Kafka components integrate well with the
 Heroku Runtime.
 
-Kafka Connect and KSQL, though not yet officially supported by Heroku, runs well on Heroku 
+Kafka Connect and KSQL, though not yet officially supported by Heroku, runs well on Heroku
 and works under both single- and multi-tenant Kafka plans.
 
 ## Architecture
@@ -25,7 +25,7 @@ to interact with.
 
 ### KSQL
 
-This runs on dynos as a distributed system. You can also scale dynos up or down. Rebalancing is taken 
+This runs on dynos as a distributed system. You can also scale dynos up or down. Rebalancing is taken
 care of here as well. KSQL also exposes a web port. This is because the `ksql` cli is essentially a
 read-eval-print-loop that communicates to the KSQL server(s), which communicate to Kafka brokers on
 your behalf. Essentially, you submit a KSQL query via REST and get a response. This response can be
@@ -56,7 +56,7 @@ additional KSQL dependencies, and starts the KSQL binary.
 All scripts are run on the dyno in Heroku.
 
 Notice this repo doesn't contain any code. This is because no code is necessary. Instead, all we have
-is configuration in the form of [demo-connector.json](https://github.com/jeffchao/bottled-water/blob/master/demo-connector.json) 
+is configuration in the form of [demo-connector.json](https://github.com/jeffchao/bottled-water/blob/master/demo-connector.json)
 which is used for Kafka Connect to specify Debezium and Connect properties. All that's required of us
 as the end user is to fill in this config file. More importantly, this file does not even need to be
 checked in, but is present in this repo as an example. This config file can be stored anywhere since
@@ -69,12 +69,15 @@ Create app, add buildpacks, add Kafka add-on, modify configs, deploy to Heroku.
 ```sh
 $ heroku apps:create my-app
 
-$ heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-apt
+$ heroku buildpacks:add --index 1 https://github.com/actionsprout/heroku-buildpack-apt
 $ heroku buildpacks:add heroku/jvm
 
 # Add a credit card to your account so you can create addons.
 
-$ heroku addons:create heroku-kafka:basic-0 --app my-app
+$ heroku addons:create heroku-kafka:standard-0
+
+# Add key passwords, please change these
+$ heroku config:set TRUSTSTORE_PASSWORD=changeme KEYSTORE_PASSWORD=changeme
 
 $ git push heroku master
 
@@ -85,11 +88,11 @@ $ heroku ps:scale web=1
 
 ### Kafka Connect
 
-This repo leverages [Debezium](https://debezium.io/) to do CDC from Postgres into Kafka. For this process, 
+This repo leverages [Debezium](https://debezium.io/) to do CDC from Postgres into Kafka. For this process,
 you will also need Heroku Postgres.
 
 ```
-$ heroku addons:create heroku-postgres:<plan>
+$ heroku addons:create heroku-postgres:standard-0
 ```
 
 Then,
